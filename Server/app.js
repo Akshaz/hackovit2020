@@ -8,7 +8,8 @@ const express = require('express'),
     flash = require('connect-flash'),
     port = 3333,
     app = express(),
-    passport = require('./auth/passport');
+    passport = require('./auth/passport'), node_media_server = require('./media_server');;
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -16,7 +17,6 @@ app.use(passport.session());
 mongoose.connect('mongodb://127.0.0.1/nodeStream' , { useNewUrlParser: true });
  
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, './views'));
 app.use(express.static('public'));
 app.use(flash());
 app.use(require('cookie-parser')());
@@ -37,5 +37,5 @@ app.use('/register', require('./routes/register'));
 app.get('*', middleware.ensureLoggedIn(), (req, res) => {
     res.render('index');
 });
-
+node_media_server.run();
 app.listen(port, () => console.log(`App listening on ${port}!`));

@@ -1,5 +1,5 @@
 let mongoose = require('mongoose'),
-    bcrypt   = require('bcrypt'),
+    bcrypt   = require('bcrypt-nodejs'),
     shortid = require('shortid'),
     Schema = mongoose.Schema;
  
